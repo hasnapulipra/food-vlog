@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    <link href="{% static 'prod/fontawesome/css/all.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'prod/css/templatemo-comparto.css' %}" rel="stylesheet" />
+    <title>Comparto HTML prod/css Template</title>
+<!--
+
+Comparto TemplateMo
+
+https://templatemo.com/tm-544-comparto
+
+-->
+</head>
+
+<body>
+    <!-- Back to top button -->
+    <br><br>
+    <a id="button"><i class="fas fa-angle-up fa-2x"></i></a>
+
+        <section class="tm-mb-1" id="about">
+            <div class="tm-row tm-about-row">
+                <div class="tm-section-1-l">
+                    <img src="{{pr.img.url}}" alt="About image" class="tm-img-responsive">
+                </div>
+                <article class="tm-section-1-r tm-bg-color-8">
+                    <h2 class="tm-mb-2 tm-title-color">{{pr.name}}</h2>
+
+                    <p>price: {{pr.price}}Rs <br>{{pr.desc}}</p>
+
+                    <p>Stock: {{pr.stock}}</p>
+                    {% if pr.stock <= 0 %}
+                    <h3 style="color:red">Sorry. No stock available</h3>
+                    {% else %}
+                    <a href="{% url 'add_cart' pr.id %}" class="tm-btn tm-btn-1 tm-link-to-services">Add to cart</a>
+
+                    {% endif %}
+                </article>
+            </div>
+        </section>
+
+
+
+
+
+
+
+    <script src="{% static 'prod/js/jquery.min.js' %}"></script> <!-- https://jquery.com/download/ -->
+    <script src="{% static 'prod/js/imagesloaded.pkgd.min.js' %}"></script> <!-- https://imagesloaded.desandro.com/ -->
+    <script src="{% static 'prod/js/isotope.pkgd.min.js' %}"></script> <!-- https://isotope.metafizzy.co/ -->
+    <script src="{% static 'prod/js/jquery.singlePageNav.min.js' %}"></script> <!-- https://github.com/ChrisWojcik/single-page-nav -->
+    <script>
+
+        // Scroll to Top button
+        var btn = $('#button');
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
+            } else {
+                btn.removeClass('show');
+            }
+        });
+
+        btn.on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, '300');
+        });
+
+        // DOM is ready
+        $(function () {
+            // Single Page Nav
+            $('#tm-nav').singlePageNav({ speed: 600 });
+
+            // Smooth Scroll (https://prod/css-tricks.com/snippets/jquery/smooth-scrolling/)
+            $('a[href*="#"]')
+                // Remove links that don't actually link to anything
+                .not('[href="#"]')
+                .not('[href="#0"]')
+                .click(function (event) {
+                    // On-page links
+                    if (
+                        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+                        &&
+                        location.hostname == this.hostname
+                    ) {
+                        // Figure out element to scroll to
+                        var target = $(this.hash);
+                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                        // Does a scroll target exist?
+                        if (target.length) {
+                            // Only prevent default if animation is actually gonna happen
+                            event.preventDefault();
+                            $('html, body').animate({
+                                scrollTop: target.offset().top
+                            }, 600, function () {
+                                // Callback after animation
+                                // Must change focus!
+                                var $target = $(target);
+                                $target.focus();
+                                if ($target.is(":focus")) { // Checking if the target was focused
+                                    return false;
+                                } else {
+                                    $target.attr('tabindex', '-1'); // Adding tabindex for elements not focusable
+                                    $target.focus(); // Set focus again
+                                };
+                            });
+                        }
+                    }
+                });
+
+            /* Isotope Gallery */
+
+            // init isotope
+            var $gallery = $(".tm-gallery").isotope({
+                itemSelector: ".tm-gallery-item",
+                layoutMode: "fitRows"
+            });
+            // layout Isotope after each image loads
+            $gallery.imagesLoaded().progress(function () {
+                $gallery.isotope("layout");
+            });
+
+            $(".filters-button-group").on("click", "a", function () {
+                var filterValue = $(this).attr("data-filter");
+                $gallery.isotope({ filter: filterValue });
+            });
+
+            $(".tabgroup > div").hide();
+            $(".tabgroup > div:first-of-type").show();
+            $(".tabs a").click(function (e) {
+                e.preventDefault();
+                var $this = $(this),
+                    tabgroup = "#" + $this.parents(".tabs").data("tabgroup"),
+                    others = $this
+                        .closest("li")
+                        .siblings()
+                        .children("a"),
+                    target = $this.attr("href");
+                others.removeClass("active");
+                $this.addClass("active");
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

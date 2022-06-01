@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!doctype html>
+<html lang="zxx">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>aranaz</title>
+  <link rel="icon" href="{% static 'car/img/favicon.png' %}">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{% static 'car/css/bootstrap.min.css' %}">
+  <!-- animate CSS -->
+  <link rel="stylesheet" href="{% static 'car/css/animate.css' %}">
+  <!-- owl carousel CSS -->
+  <link rel="stylesheet" href="{% static 'car/css/owl.carousel.min.css' %}">
+  <!-- nice select CSS -->
+  <link rel="stylesheet" href="{% static 'car/css/nice-select.css' %}">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="{% static 'car/css/all.css' %}">
+  <!-- flaticon CSS -->
+  <link rel="stylesheet" href="{% static 'car/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'car/css/themify-icons.css' %}">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="{% static 'car/css/magnific-popup.css' %}">
+  <!-- swiper CSS -->
+  <link rel="stylesheet" href="{% static 'car/css/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'car/css/price_rangs.css' %}">
+  <!-- style CSS -->
+  <link rel="stylesheet" href="{% static 'car/css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <!--::header part start::-->
+
+  <!-- Header part end-->
+
+
+  <!--================Home Banner Area =================-->
+  <!-- breadcrumb start-->
+
+
+  <!-- breadcrumb start-->
+
+  <!--================Cart Area =================-->
+  <section class="cart_area">
+    <div class="container">
+      <div class="cart_inner">
+
+        <div class="table-responsive">
+
+          <table class="table">
+            <thead>
+              <tr>
+
+                <th scope="col" style="color:white;">Product</th>
+                <th scope="col" style="color:white;">Price</th>
+                <th scope="col" style="color:white;">Quantity</th>
+                <th scope="col" style="color:white;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              ...................................................
+              {% for i in ci %}
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <a href="{{i.prodt.get_url}}"><img src="{{i.prodt.img.url}}" alt="{{i.prodt.name}}" style="height:100px;width:100px;"/></a>
+                    </div>
+                    <div class="media-body">
+                      <p>{{i.prodt.name}}</p>
+                      <p>ID: {{i.prodt.id}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <h5>${{i.prodt.price}}</h5>
+                </td>
+                <td>
+                  <div class="product_count">
+
+
+
+
+                    <h5><a href="{% url 'add_cart' i.prodt.id %}"><i class="fa fa-plus" style="font-size:9px"></i></a>&nbsp; &nbsp;{{i.quan}}&nbsp;&nbsp; <a href="{% url 'min_cart' i.prodt.id %}"><i class="fa fa-minus" style="font-size:9px"></i></a></h5>
+
+                  </div>
+
+                </td>
+                <td>
+                  <h5>${{i.total}}</h5>
+                </td>
+                <td>
+                  <div class="buttons">
+                    <span><a href="{% url 'cart_delete' i.prodt.id %}"><i class="fa fa-trash" style="color:black;"></i></a></span>
+                  </div>
+                </td>
+              </tr>
+
+            ...............................................
+              {% endfor %}
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal</h5>
+                </td>
+                <td>
+                  <h5>${{t}}</h5>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <div class="checkout_btn_inner float-right">
+            <a class="btn_1" href="/">Continue Shopping</a>
+            <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+          </div>
+        </div>
+      </div>
+  </section>
+  <br><br>
+  <!--================End Cart Area =================-->
+
+  <!--::footer_part start::-->
+
+  <!--::footer_part end::-->
+
+  <!-- jquery plugins here-->
+  <!-- jquery -->
+  <script src="{% static 'car/js/jquery-1.12.1.min.js' %}"></script>
+  <!-- popper js -->
+  <script src="{% static 'car/js/popper.min.js' %}"></script>
+  <!-- bootstrap js -->
+  <script src="{% static 'car/js/bootstrap.min.js' %}"></script>
+  <!-- easing js -->
+  <!--<script src="{% static 'car/js/jquery.magnific-popup.js"></script>
+  <!-- swiper js -->
+ <script src="{% static 'car/js/swiper.min.js' %}"></script>
+  <!-- swiper js -->
+  <script src="{% static 'car/js/masonry.pkgd.js' %}"></script>
+  <!-- particles js -->
+  <script src="{% static 'car/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'car/js/jquery.nice-select.min.js' %}"></script>
+  <!-- slick js -->
+  <script src="{% static 'car/js/slick.min.js' %}"></script>
+  <script src="{% static 'car/js/jquery.counterup.min.js' %}"></script>
+  <script src="{% static 'car/js/waypoints.min.js' %}"></script>
+  <script src="{% static 'car/js/contact.js' %}"></script>
+  <script src="{% static 'car/js/jquery.ajaxchimp.min.js' %}"></script>
+  <script src="{% static 'car/js/jquery.form.js' %}"></script>
+  <script src="{% static 'car/js/jquery.validate.min.js' %}"></script>
+  <script src="{% static 'car/js/mail-script.js' %}"></script>
+  <script src="{% static 'car/js/stellar.js' %}"></script>
+  <script src="{% static 'car/js/price_rangs.js' %}"></script>
+  <!-- custom js -->
+  <script src="{% static 'car/js/custom.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}

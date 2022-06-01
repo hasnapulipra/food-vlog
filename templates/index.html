@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+ <div class="wrapper row0">
+   <div id="topbar" class="hoc clear">
+
+       <div class="fl-left dropdown">
+  <button class="dropbtn">Filter</button>
+  <div class="dropdown-content">
+
+           <a href="/">All products</a>
+              {% for i in ct %}
+            <a href={{i.get_url}}>{{i.name}}</a>
+
+              {% endfor %}
+
+
+
+  </div>
+</div>
+<div class="fl_right">
+        <!-- ################################################################################################ -->
+        <ul class="nospace">
+
+          <li id="searchform">
+            <div>
+              <form action="{% url 'search' %}" method="get">
+
+                <fieldset>
+                  <legend>Quick Search:</legend>
+                  <input type="text" placeholder="Enter search item &hellip;" name="q">
+                  <button type="submit"><i class="fas fa-search"></i></button>
+                </fieldset>
+              </form>
+            </div>
+          </li>
+        </ul>
+        <!-- ################################################################################################ -->
+      </div>
+   </div>
+ </div>
+
+
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+<div class="abcd" style="background-image:url('{% static 'home/images/demo/backgrounds/homebg.jpg' %}');">
+
+  <div id="pageintro" class="hoc clear">
+    <!-- ################################################################################################ -->
+
+    <article>
+      <h3 class="heading">QUALITY FOOD ITEMS</h3>
+      <p>Register with us and have quality food items at your door step</p>
+      <footer>
+
+      </footer>
+    </article>
+    <!-- ################################################################################################ -->
+  </div>
+
+  <!-- ################################################################################################ -->
+</div>
+<!-- End Top Background Image Wrapper -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    <section id="introblocks">
+      <ul class="nospace group btmspace-80">
+        {% for i in pg.object_list %}
+
+        <li class="one_third">
+          <figure><a class="imgover" href={{i.get_url}}><img src="{{i.img.url}}" alt="" style="height:300px;width:800px;"></a>
+            <figcaption>
+              <h6 class="heading">{{i.name}}</h6>
+              <p>{{i.desc|truncatewords:7}}</p>
+
+            </figcaption>
+          </figure>
+        </li>
+
+        {% endfor %}
+      </ul>
+    </section>
+      <center>
+          {% for p in pg.paginator.page_range %}
+          <a href="?page={{p}}" class="btn btn-light btn-sm {% if pg.number == p %} active {% endif %}">{{p}}</a>
+          {% endfor %}
+      </center>
+    <!-- ################################################################################################ -->
+    <hr class="btmspace-80">
+    <!-- ################################################################################################ -->
+
+    <!-- ################################################################################################ -->
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+
+
+
+
+
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="{% static 'home/layout/scripts/jquery.min.js' %}"></script>
+<script src="{% static 'home/layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{% static 'home/layout/scripts/jquery.mobilemenu.js' %}"></script>
+{% endblock %}
